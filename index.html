@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adi Sharma</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ─── HOME PAGE STYLES ─── */
+
+    /* Reveal animation */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    [data-reveal].revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 3rem;
+      padding-top: 5rem;
+      position: relative;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Left: text */
+    .hero-text {}
+
+    .hero-location {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--grey);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .hero-location span { color: var(--red); margin-right: 0.2rem; }
+
+    .hero-name {
+      margin-bottom: 0.5rem;
+      line-height: 0.9;
+    }
+    .hero-name .first {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 9vw, 8rem);
+      color: var(--white);
+      display: block;
+      letter-spacing: 0.02em;
+    }
+    .hero-name .last {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 9vw, 8rem);
+      color: var(--grey-dim);
+      font-style: italic;
+      display: block;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-divider {
+      width: 2.5rem;
+      height: 2px;
+      background: var(--red);
+      margin: 1.2rem 0;
+      position: relative;
+    }
+    .hero-divider::after {
+      content: '';
+      position: absolute;
+      left: 2.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red-bright);
+    }
+
+    .hero-bio {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #bbb;
+      max-width: 440px;
+      margin-bottom: 2.2rem;
+    }
+    .hero-bio strong { color: var(--white); font-weight: 600; }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Right: photo */
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .photo-container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+    }
+
+    .photo-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1.5px solid var(--red);
+      animation: spin-ring 12s linear infinite;
+      opacity: 0.6;
+    }
+    .photo-ring::before {
+      content: '';
+      position: absolute;
+      top: -4px; left: 50%;
+      transform: translateX(-50%);
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--red-bright);
+      box-shadow: 0 0 10px var(--red-bright);
+    }
+    @keyframes spin-ring {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .photo-img {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(20%);
+      transition: filter 0.4s ease, transform 0.4s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hover: show info overlay */
+    .photo-container:hover .photo-img {
+      filter: grayscale(0%) brightness(0.5);
+      transform: scale(1.02);
+    }
+    .photo-container:hover .photo-info {
+      opacity: 1;
+    }
+
+    .photo-info {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      gap: 0.8rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.1rem;
+    }
+    .info-item .label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--red-bright);
+      text-transform: uppercase;
+    }
+    .info-item .value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    /* ─── SKILLS SECTION ─── */
+    .skills-section {
+      padding: 4rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .skill-col {}
+    .skill-col-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .skill-col-label::before {
+      content: '—';
+      color: var(--red);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      padding: 0.35rem 0.8rem;
+      border: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #ccc;
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .skill-tag:hover {
+      border-color: var(--red);
+      color: var(--white);
+      background: var(--red-dim);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { padding: 5rem 1.5rem 2rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .photo-container, .photo-img { width: 220px; height: 220px; }
+      .hero-photo-wrap { order: -1; }
+      .skills-section { padding: 2rem 1.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      nav { padding: 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Animated background lines -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- Navigation -->
+<nav>
+  <a href="index.html" class="nav-logo">A<span>.</span>S</a>
+  <button id="menu-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Full-screen menu overlay -->
+<div id="menu-overlay">
+  <div class="menu-inner">
+    <ul class="menu-links">
+      <li><a href="index.html"><span class="num">01</span>HOME</a></li>
+      <li><a href="work.html"><span class="num">02</span>WORK</a></li>
+      <li><a href="contact.html"><span class="num">03</span>CONTACT</a></li>
+    </ul>
+    <div class="menu-socials">
+      <a href="https://github.com/adii2006675" target="_blank">↗ github</a>
+      <a href="https://www.linkedin.com/in/adisharma06/" target="_blank">↗ linkedin</a>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<main class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <!-- Left: Text -->
+      <div class="hero-text">
+        <div class="hero-location" data-reveal>
+          <span>●</span> NEWARK, DELAWARE · UNIVERSITY OF DELAWARE
+        </div>
+
+        <div class="hero-name" data-reveal style="transition-delay:0.1s">
+          <span class="first">Adi</span>
+          <span class="last">Sharma</span>
+        </div>
+
+        <div class="hero-divider" data-reveal style="transition-delay:0.2s"></div>
+
+        <p class="hero-bio" data-reveal style="transition-delay:0.3s">
+          Hello, I'm a freshman at the <strong>University of Delaware</strong> passionate about
+          <strong>computer science, machine learning, and AI</strong>. I've collaborated with
+          multiple professors and universities on numerous research projects,
+          and even built some of my own. This page is a showcase of all the
+          cool work I've been doing, hope you enjoy.
+        </p>
+
+        <div class="hero-btns" data-reveal style="transition-delay:0.4s">
+          <a href="work.html" class="btn btn-red">VIEW MY WORK</a>
+          <a href="contact.html" class="btn btn-outline">GET IN TOUCH</a>
+        </div>
+      </div>
+
+      <!-- Right: Photo -->
+      <div class="hero-photo-wrap" data-reveal style="transition-delay:0.2s">
+        <div class="photo-container">
+          <div class="photo-ring"></div>
+          <img src="assets/profile.jpg" alt="Adi Sharma" class="photo-img"/>
+          <div class="photo-info">
+            <div class="info-item">
+              <span class="label">📍 Location</span>
+              <span class="value">Newark, Delaware</span>
+            </div>
+            <div class="info-item">
+              <span class="label">🎓 Year</span>
+              <span class="value">Freshman · CS</span>
+            </div>
+            <div class="info-item">
+              <span class="label">⚡ Hobbies</span>
+              <span class="value">Gym · Soccer · Investing · Friends</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills-section">
+    <div class="section-label" data-reveal>Skills &amp; Languages</div>
+    <div class="skills-grid">
+
+      <div class="skill-col" data-reveal style="transition-delay:0.1s">
+        <div class="skill-col-label">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">HTML/CSS</span>
+        </div>
+      </div>
+
+      <div class="skill-col" data-reveal style="transition-delay:0.2s">
+        <div class="skill-col-label">Frameworks &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">MATLAB</span>
+          <span class="skill-tag">Supabase</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">Expo</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Linux</span>
+        </div>
+      </div>
+
+      <div class="skill-col" data-reveal style="transition-delay:0.3s">
+        <div class="skill-col-label">Specializations</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Computer Vision</span>
+          <span class="skill-tag">LLM Training</span>
+          <span class="skill-tag">Prompt Engineering</span>
+          <span class="skill-tag">Transfer Learning</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Adi Sharma · Built from scratch</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
