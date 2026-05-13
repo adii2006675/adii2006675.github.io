@@ -121,12 +121,12 @@
       height: 100%;
       object-fit: cover;
       /* Zoom in on face — increase scale and adjust position */
-      object-position: center 15%;
+      object-position: center 55%;
       transform: scale(1.4);
       transform-origin: center 30%;
       display: block;
       transition: filter 0.5s ease;
-      filter: brightness(0.92);
+      filter: brightness(1);
     }
     .photo-outer:hover .photo-img {
       filter: brightness(0.4);
@@ -153,14 +153,14 @@
 
     .info-item .label {
       font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
       color: var(--red-bright);
       text-transform: uppercase;
     }
     .info-item .value {
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.73rem;
+      font-weight: 200;
       color: var(--white);
     }
 
@@ -199,44 +199,42 @@
     <div class="hero-inner">
 
       <div class="hero-text">
-        <div class="hero-location" data-reveal>
-          <span>●</span> NEWARK, DELAWARE · UNIVERSITY OF DELAWARE
+        <div class="hero-location" data-reveal style="transition-delay:0.3s">
         </div>
-        <div class="hero-name" data-reveal style="transition-delay:0.1s">
+        <div class="hero-name" data-reveal style="transition-delay:0.4s">
           <span class="first">Adi</span>
           <span class="last">Sharma</span>
         </div>
-        <div class="hero-divider" data-reveal style="transition-delay:0.2s"></div>
-        <p class="hero-bio" data-reveal style="transition-delay:0.3s">
-          Hello, I'm a freshman at the <strong>University of Delaware</strong> passionate about
-          <strong>computer science, machine learning, and AI</strong>. I've collaborated with
-          multiple professors and universities on numerous research projects,
-          and even built some of my own. This page is a showcase of all the
-          cool work I've been doing, hope you enjoy.
+        <div class="hero-divider" data-reveal style="transition-delay:0.5s"></div>
+        <p class="hero-bio" data-reveal style="transition-delay:0.6s">
+          Hello, I am a rising sophmore at the <strong>University of Delaware</strong> majoring in 
+          <strong>computer science</strong>. I enjoy spending time building projects, doing research with professors,
+          and figuring out how to utilize AI to its full potential. This is a <strong>personal website</strong> showcasing all of the
+          cool work I've done, hope you enjoy :)
         </p>
-        <div class="hero-btns" data-reveal style="transition-delay:0.4s">
+        <div class="hero-btns" data-reveal style="transition-delay:0.7s">
           <a href="work.html" class="btn btn-red">VIEW MY WORK</a>
           <a href="contact.html" class="btn btn-outline">GET IN TOUCH</a>
         </div>
       </div>
 
-      <div class="hero-photo-wrap" data-reveal style="transition-delay:0.2s">
+      <div class="hero-photo-wrap" data-reveal style="transition-delay:0.8s">
         <div class="photo-outer">
           <div class="photo-container">
             <img src="assets/profile.jpg" alt="Adi Sharma" class="photo-img"/>
           </div>
           <div class="photo-info">
             <div class="info-item">
-              <div class="label">📍 Location</div>
-              <div class="value">Newark, Delaware</div>
+              <div class="label">Languages</div>
+              <div class="value">Python · C · TypeScript · Java · HTML/CSS</div>
             </div>
             <div class="info-item">
-              <div class="label">🎓 Year</div>
-              <div class="value">Freshman · CS</div>
+              <div class="label">Framework</div>
+              <div class="value">PyTorch · Node.js · MATLAB · Supabase</div>
             </div>
             <div class="info-item">
-              <div class="label">⚡ Hobbies</div>
-              <div class="value">Gym · Soccer · Investing · Friends</div>
+              <div class="label">Skills</div>
+              <div class="value">LLM Training · Data Analysis · Computer Vision</div>
             </div>
           </div>
         </div>

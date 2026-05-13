@@ -12,7 +12,7 @@
   let mouse = { x: -9999, y: -9999 };
   let particles = [];
 
-  const COUNT = 90;
+  const COUNT = 150;
   const RED = '192,57,43';
 
   function resize() {
@@ -42,8 +42,8 @@
       const dx = p.x - mouse.x;
       const dy = p.y - mouse.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 150) {
-        const force = (150 - dist) / 150;
+      if (dist < 80) {
+        const force = (80 - dist) / 80;
         p.vx += (dx / dist) * force * 0.8;
         p.vy += (dy / dist) * force * 0.8;
       }
@@ -62,13 +62,13 @@
         const a = particles[i], b = particles[j];
         const dx = a.x - b.x, dy = a.y - b.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 130) {
-          const alpha = (1 - dist / 130) * 0.35;
+        if (dist < 160) {
+          const alpha = (1 - dist / 160) * 0.5;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
           ctx.strokeStyle = `rgba(${RED},${alpha})`;
-          ctx.lineWidth = 0.8;
+          ctx.lineWidth = 1;
           ctx.stroke();
         }
       }
@@ -90,11 +90,11 @@
     });
 
     if (mouse.x > 0) {
-      const mg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 120);
-      mg.addColorStop(0, `rgba(${RED},0.12)`);
+      const mg = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 60);
+      mg.addColorStop(0, `rgba(${RED},0.1)`);
       mg.addColorStop(1, `rgba(${RED},0)`);
       ctx.beginPath();
-      ctx.arc(mouse.x, mouse.y, 120, 0, Math.PI * 2);
+      ctx.arc(mouse.x, mouse.y, 60, 0, Math.PI * 2);
       ctx.fillStyle = mg;
       ctx.fill();
     }
