@@ -88,12 +88,15 @@
       justify-content: center;
       align-items: center;
     }
-    .photo-container {
+
+    /* Outer wrapper holds the glow — NOT clipped */
+    .photo-outer {
       position: relative;
       width: 320px;
       height: 320px;
     }
-    /* Red glow only — no ring, no spinning dot */
+
+    /* Glow lives outside the clipped container */
     .photo-glow {
       position: absolute;
       inset: -16px;
@@ -104,29 +107,36 @@
       z-index: 0;
       pointer-events: none;
     }
-    .photo-container:hover .photo-glow {
-      box-shadow: 0 0 45px 14px rgba(231,76,60,0.4),
-                  0 0 90px 28px rgba(192,57,43,0.18);
+    .photo-outer:hover .photo-glow {
+      box-shadow: 0 0 50px 16px rgba(231,76,60,0.45),
+                  0 0 100px 32px rgba(192,57,43,0.2);
     }
-    .photo-img {
-      width: 320px;
-      height: 320px;
+
+    /* Inner container clips the image to circle — no black border */
+    .photo-container {
+      position: absolute;
+      inset: 0;
       border-radius: 50%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .photo-img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: center 20%;
-      position: relative;
-      z-index: 1;
+      display: block;
       transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94),
                   filter 0.5s ease;
       filter: brightness(0.92);
-      outline: none;
-      border: none;
-      background: transparent;
     }
-    .photo-container:hover .photo-img {
+    .photo-outer:hover .photo-img {
       transform: scale(1.13);
-      filter: brightness(0.35) blur(1.5px);
+      filter: brightness(0.42);
     }
+
+    /* Info overlay sits above image */
     .photo-info {
       position: absolute;
       inset: 0;
@@ -143,7 +153,8 @@
       text-align: center;
       pointer-events: none;
     }
-    .photo-container:hover .photo-info { opacity: 1; }
+    .photo-outer:hover .photo-info { opacity: 1; }
+
     .info-item .label {
       font-family: var(--font-mono);
       font-size: 0.6rem;
@@ -160,7 +171,7 @@
     @media (max-width: 768px) {
       .hero { padding: 5rem 1.5rem 2rem; }
       .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .photo-container, .photo-img { width: 220px; height: 220px; }
+      .photo-outer { width: 220px; height: 220px; }
       .hero-photo-wrap { order: -1; }
       nav { padding: 1rem 1.5rem; }
     }
@@ -190,6 +201,7 @@
 <main class="page">
   <section class="hero">
     <div class="hero-inner">
+
       <div class="hero-text">
         <div class="hero-location" data-reveal>
           <span>●</span> NEWARK, DELAWARE · UNIVERSITY OF DELAWARE
@@ -213,9 +225,11 @@
       </div>
 
       <div class="hero-photo-wrap" data-reveal style="transition-delay:0.2s">
-        <div class="photo-container">
+        <div class="photo-outer">
           <div class="photo-glow"></div>
-          <img src="assets/profile.jpg" alt="Adi Sharma" class="photo-img"/>
+          <div class="photo-container">
+            <img src="assets/profile.jpg" alt="Adi Sharma" class="photo-img"/>
+          </div>
           <div class="photo-info">
             <div class="info-item">
               <div class="label">📍 Location</div>
@@ -232,6 +246,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
 </main>
