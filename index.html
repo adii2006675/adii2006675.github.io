@@ -6,29 +6,20 @@
   <title>Adi Sharma</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* ─── HOME PAGE STYLES ─── */
-
-    /* Reveal animation */
     [data-reveal] {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    [data-reveal].revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    [data-reveal].revealed { opacity: 1; transform: translateY(0); }
 
-    /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       padding: 0 3rem;
       padding-top: 5rem;
-      position: relative;
     }
-
     .hero-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -38,10 +29,6 @@
       width: 100%;
       margin: 0 auto;
     }
-
-    /* Left: text */
-    .hero-text {}
-
     .hero-location {
       font-family: var(--font-mono);
       font-size: 0.7rem;
@@ -50,15 +37,11 @@
       text-transform: uppercase;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.8rem;
       margin-bottom: 1.2rem;
     }
-    .hero-location span { color: var(--red); margin-right: 0.2rem; }
-
-    .hero-name {
-      margin-bottom: 0.5rem;
-      line-height: 0.9;
-    }
+    .hero-location span { color: var(--red); }
+    .hero-name { margin-bottom: 0.5rem; line-height: 0.9; }
     .hero-name .first {
       font-family: var(--font-display);
       font-size: clamp(4rem, 9vw, 8rem);
@@ -74,10 +57,8 @@
       display: block;
       letter-spacing: 0.02em;
     }
-
     .hero-divider {
-      width: 2.5rem;
-      height: 2px;
+      width: 2.5rem; height: 2px;
       background: var(--red);
       margin: 1.2rem 0;
       position: relative;
@@ -85,14 +66,12 @@
     .hero-divider::after {
       content: '';
       position: absolute;
-      left: 2.8rem;
-      top: 50%;
+      left: 2.8rem; top: 50%;
       transform: translateY(-50%);
       width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--red-bright);
     }
-
     .hero-bio {
       font-size: 0.95rem;
       line-height: 1.8;
@@ -101,71 +80,48 @@
       margin-bottom: 2.2rem;
     }
     .hero-bio strong { color: var(--white); font-weight: 600; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-    .hero-btns {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* Right: photo */
+    /* ─── PHOTO ─── */
     .hero-photo-wrap {
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
     }
-
     .photo-container {
       position: relative;
       width: 320px;
       height: 320px;
     }
-
-    .photo-ring {
+    .photo-glow {
       position: absolute;
-      inset: -8px;
+      inset: -12px;
       border-radius: 50%;
-      border: 1.5px solid var(--red);
-      animation: spin-ring 12s linear infinite;
-      opacity: 0.6;
+      box-shadow: 0 0 30px 8px rgba(192,57,43,0.35),
+                  0 0 60px 16px rgba(192,57,43,0.15);
+      transition: box-shadow 0.4s ease;
+      z-index: 0;
     }
-    .photo-ring::before {
-      content: '';
-      position: absolute;
-      top: -4px; left: 50%;
-      transform: translateX(-50%);
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--red-bright);
-      box-shadow: 0 0 10px var(--red-bright);
+    .photo-container:hover .photo-glow {
+      box-shadow: 0 0 50px 16px rgba(231,76,60,0.6),
+                  0 0 100px 32px rgba(192,57,43,0.25);
     }
-    @keyframes spin-ring {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
     .photo-img {
       width: 320px;
       height: 320px;
       border-radius: 50%;
       object-fit: cover;
       object-position: center top;
-      filter: grayscale(20%);
-      transition: filter 0.4s ease, transform 0.4s ease;
       position: relative;
       z-index: 1;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94),
+                  filter 0.5s ease;
+      filter: brightness(0.9);
     }
-
-    /* Hover: show info overlay */
     .photo-container:hover .photo-img {
-      filter: grayscale(0%) brightness(0.5);
-      transform: scale(1.02);
+      transform: scale(1.07);
+      filter: brightness(0.35) blur(1px);
     }
-    .photo-container:hover .photo-info {
-      opacity: 1;
-    }
-
     .photo-info {
       position: absolute;
       inset: 0;
@@ -181,13 +137,7 @@
       padding: 2rem;
       text-align: center;
     }
-
-    .info-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.1rem;
-    }
+    .photo-container:hover .photo-info { opacity: 1; }
     .info-item .label {
       font-family: var(--font-mono);
       font-size: 0.6rem;
@@ -201,21 +151,18 @@
       color: var(--white);
     }
 
-    /* ─── SKILLS SECTION ─── */
+    /* ─── SKILLS ─── */
     .skills-section {
       padding: 4rem 3rem;
       max-width: 1100px;
       margin: 0 auto;
     }
-
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
       margin-top: 2rem;
     }
-
-    .skill-col {}
     .skill-col-label {
       font-family: var(--font-mono);
       font-size: 0.65rem;
@@ -223,20 +170,10 @@
       color: var(--red);
       text-transform: uppercase;
       margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      display: flex; align-items: center; gap: 0.6rem;
     }
-    .skill-col-label::before {
-      content: '—';
-      color: var(--red);
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+    .skill-col-label::before { content: '—'; color: var(--red); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
     .skill-tag {
       padding: 0.35rem 0.8rem;
       border: 1px solid var(--border);
@@ -252,7 +189,6 @@
       background: var(--red-dim);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .hero { padding: 5rem 1.5rem 2rem; }
       .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -266,10 +202,8 @@
 </head>
 <body>
 
-<!-- Animated background lines -->
 <canvas id="bg-canvas"></canvas>
 
-<!-- Navigation -->
 <nav>
   <a href="index.html" class="nav-logo">A<span>.</span>S</a>
   <button id="menu-btn" aria-label="Menu">
@@ -277,7 +211,6 @@
   </button>
 </nav>
 
-<!-- Full-screen menu overlay -->
 <div id="menu-overlay">
   <div class="menu-inner">
     <ul class="menu-links">
@@ -292,26 +225,18 @@
   </div>
 </div>
 
-<!-- Page content -->
 <main class="page">
-
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-
-      <!-- Left: Text -->
       <div class="hero-text">
         <div class="hero-location" data-reveal>
           <span>●</span> NEWARK, DELAWARE · UNIVERSITY OF DELAWARE
         </div>
-
         <div class="hero-name" data-reveal style="transition-delay:0.1s">
           <span class="first">Adi</span>
           <span class="last">Sharma</span>
         </div>
-
         <div class="hero-divider" data-reveal style="transition-delay:0.2s"></div>
-
         <p class="hero-bio" data-reveal style="transition-delay:0.3s">
           Hello, I'm a freshman at the <strong>University of Delaware</strong> passionate about
           <strong>computer science, machine learning, and AI</strong>. I've collaborated with
@@ -319,43 +244,38 @@
           and even built some of my own. This page is a showcase of all the
           cool work I've been doing, hope you enjoy.
         </p>
-
         <div class="hero-btns" data-reveal style="transition-delay:0.4s">
           <a href="work.html" class="btn btn-red">VIEW MY WORK</a>
           <a href="contact.html" class="btn btn-outline">GET IN TOUCH</a>
         </div>
       </div>
 
-      <!-- Right: Photo -->
       <div class="hero-photo-wrap" data-reveal style="transition-delay:0.2s">
         <div class="photo-container">
-          <div class="photo-ring"></div>
+          <div class="photo-glow"></div>
           <img src="assets/profile.jpg" alt="Adi Sharma" class="photo-img"/>
           <div class="photo-info">
             <div class="info-item">
-              <span class="label">📍 Location</span>
-              <span class="value">Newark, Delaware</span>
+              <div class="label">📍 Location</div>
+              <div class="value">Newark, Delaware</div>
             </div>
             <div class="info-item">
-              <span class="label">🎓 Year</span>
-              <span class="value">Freshman · CS</span>
+              <div class="label">🎓 Year</div>
+              <div class="value">Freshman · CS</div>
             </div>
             <div class="info-item">
-              <span class="label">⚡ Hobbies</span>
-              <span class="value">Gym · Soccer · Investing · Friends</span>
+              <div class="label">⚡ Hobbies</div>
+              <div class="value">Gym · Soccer · Investing · Friends</div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section class="skills-section">
     <div class="section-label" data-reveal>Skills &amp; Languages</div>
     <div class="skills-grid">
-
       <div class="skill-col" data-reveal style="transition-delay:0.1s">
         <div class="skill-col-label">Languages</div>
         <div class="skill-tags">
@@ -367,7 +287,6 @@
           <span class="skill-tag">HTML/CSS</span>
         </div>
       </div>
-
       <div class="skill-col" data-reveal style="transition-delay:0.2s">
         <div class="skill-col-label">Frameworks &amp; Tools</div>
         <div class="skill-tags">
@@ -381,7 +300,6 @@
           <span class="skill-tag">Linux</span>
         </div>
       </div>
-
       <div class="skill-col" data-reveal style="transition-delay:0.3s">
         <div class="skill-col-label">Specializations</div>
         <div class="skill-tags">
@@ -391,10 +309,8 @@
           <span class="skill-tag">Transfer Learning</span>
         </div>
       </div>
-
     </div>
   </section>
-
 </main>
 
 <footer>

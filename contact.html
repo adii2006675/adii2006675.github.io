@@ -6,7 +6,6 @@
   <title>Contact — Adi Sharma</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-
     [data-reveal] {
       opacity: 0;
       transform: translateY(30px);
@@ -14,7 +13,6 @@
     }
     [data-reveal].revealed { opacity: 1; transform: translateY(0); }
 
-    /* ─── CONTACT PAGE ─── */
     .contact-page {
       min-height: 100vh;
       display: flex;
@@ -24,7 +22,6 @@
       max-width: 900px;
       margin: 0 auto;
     }
-
     .contact-title {
       font-family: var(--font-display);
       font-size: clamp(3rem, 8vw, 6.5rem);
@@ -33,7 +30,6 @@
       margin-bottom: 1rem;
     }
     .contact-title span { color: var(--red); }
-
     .contact-subtitle {
       font-size: 0.9rem;
       color: var(--grey);
@@ -41,15 +37,11 @@
       max-width: 440px;
       margin-bottom: 3rem;
     }
-
-    /* ─── LINKS GRID ─── */
     .contact-links {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.2rem;
-      margin-bottom: 3rem;
     }
-
     .contact-link {
       display: flex;
       align-items: center;
@@ -57,7 +49,6 @@
       padding: 1.4rem 1.6rem;
       border: 1px solid var(--border);
       background: var(--bg2);
-      cursor: pointer;
       text-decoration: none;
       color: var(--white);
       transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
@@ -81,14 +72,9 @@
       box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 20px var(--red-glow);
     }
     .contact-link:hover::after { transform: scaleX(1); }
-
-    /* Visited state — red highlight like the reference */
-    .contact-link:visited {
-      border-color: var(--red);
-      color: var(--red-bright);
-    }
+    .contact-link:visited { border-color: var(--red); }
     .contact-link:visited .link-label { color: var(--red-bright); }
-
+    .contact-link:visited .link-value { color: var(--red-bright); }
     .link-icon {
       width: 40px; height: 40px;
       border: 1px solid var(--border);
@@ -103,8 +89,6 @@
       border-color: var(--red);
       background: rgba(192,57,43,0.2);
     }
-
-    .link-text {}
     .link-label {
       font-family: var(--font-mono);
       font-size: 0.65rem;
@@ -115,13 +99,11 @@
       transition: color 0.2s;
     }
     .contact-link:hover .link-label { color: var(--red-bright); }
-
     .link-value {
       font-size: 0.92rem;
       font-weight: 600;
       color: var(--white);
     }
-
     .link-arrow {
       margin-left: auto;
       font-size: 1.1rem;
@@ -132,50 +114,46 @@
       color: var(--red-bright);
       transform: translate(3px, -3px);
     }
-
-    /* ─── RESUME SECTION ─── */
-    .resume-section {
-      border-top: 1px solid var(--border);
-      padding-top: 2.5rem;
-    }
-
-    .resume-box {
+    .resume-card {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 1.5rem 2rem;
+      gap: 1.2rem;
+      padding: 1.4rem 1.6rem;
       border: 1px solid var(--border);
       background: var(--bg2);
-      margin-top: 1.2rem;
-      transition: border-color 0.3s;
-      gap: 1.5rem;
-      flex-wrap: wrap;
+      transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
     }
-    .resume-box:hover { border-color: var(--red); }
-
-    .resume-info {}
-    .resume-name {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.2rem;
+    .resume-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 1px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
     }
-    .resume-meta {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--grey);
-      letter-spacing: 0.1em;
+    .resume-card:hover {
+      border-color: var(--red);
+      background: var(--red-dim);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 20px var(--red-glow);
     }
-
+    .resume-card:hover::after { transform: scaleX(1); }
+    .resume-card:hover .link-label { color: var(--red-bright); }
     .resume-btns {
+      margin-left: auto;
       display: flex;
       gap: 0.8rem;
+      flex-shrink: 0;
     }
-
     @media (max-width: 640px) {
       .contact-page { padding: 6rem 1.5rem 3rem; }
       .contact-links { grid-template-columns: 1fr; }
-      .resume-box { flex-direction: column; align-items: flex-start; }
+      .resume-card { flex-wrap: wrap; }
+      .resume-btns { margin-left: 0; }
     }
   </style>
 </head>
@@ -206,22 +184,17 @@
 
 <main class="page">
   <div class="contact-page">
-
     <div class="section-label" data-reveal>Get In Touch</div>
-
     <h1 class="contact-title" data-reveal style="transition-delay:0.1s">
       Let's<br/><span>Connect</span>
     </h1>
-
     <p class="contact-subtitle" data-reveal style="transition-delay:0.2s">
-      Whether it's research collaboration, a cool project, or just saying hey —
-      my inbox and DMs are open.
+      Whether it's research collaboration, a cool project, or just
+      saying hey — my inbox and DMs are open.
     </p>
 
-    <!-- Contact Links -->
     <div class="contact-links" data-reveal style="transition-delay:0.3s">
 
-      <!-- Email -->
       <a href="mailto:adii@udel.edu" class="contact-link">
         <div class="link-icon">✉</div>
         <div class="link-text">
@@ -231,7 +204,6 @@
         <span class="link-arrow">↗</span>
       </a>
 
-      <!-- GitHub -->
       <a href="https://github.com/adii2006675" target="_blank" class="contact-link">
         <div class="link-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -245,7 +217,6 @@
         <span class="link-arrow">↗</span>
       </a>
 
-      <!-- LinkedIn -->
       <a href="https://www.linkedin.com/in/adisharma06/" target="_blank" class="contact-link">
         <div class="link-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -259,33 +230,19 @@
         <span class="link-arrow">↗</span>
       </a>
 
-      <!-- University -->
-      <a href="https://www.udel.edu" target="_blank" class="contact-link">
-        <div class="link-icon">🎓</div>
-        <div class="link-text">
-          <div class="link-label">University</div>
-          <div class="link-value">University of Delaware</div>
-        </div>
-        <span class="link-arrow">↗</span>
-      </a>
-
-    </div>
-
-    <!-- Resume -->
-    <div class="resume-section" data-reveal style="transition-delay:0.4s">
-      <div class="section-label">Resume</div>
-      <div class="resume-box">
+      <div class="resume-card">
+        <div class="link-icon">📄</div>
         <div class="resume-info">
-          <div class="resume-name">Adi Sharma — Resume</div>
-          <div class="resume-meta">PDF · Updated April 2026</div>
+          <div class="link-label">Resume</div>
+          <div class="link-value">Adi Sharma — April 2026</div>
         </div>
         <div class="resume-btns">
-          <a href="assets/resume.pdf" target="_blank" class="btn btn-red">VIEW PDF</a>
-          <a href="assets/resume.pdf" download class="btn btn-outline">DOWNLOAD</a>
+          <a href="assets/resume.pdf" target="_blank" class="btn btn-red" style="font-size:0.72rem; padding:0.55rem 1.2rem;">VIEW</a>
+          <a href="assets/resume.pdf" download class="btn btn-outline" style="font-size:0.72rem; padding:0.55rem 1.2rem;">DOWNLOAD</a>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </main>
 
