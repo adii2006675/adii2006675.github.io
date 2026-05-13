@@ -89,35 +89,30 @@
       align-items: center;
     }
 
-    /* Outer wrapper holds the glow — NOT clipped */
     .photo-outer {
       position: relative;
       width: 320px;
       height: 320px;
-    }
-
-    /* Glow lives outside the clipped container */
-    .photo-glow {
-      position: absolute;
-      inset: -16px;
       border-radius: 50%;
-      box-shadow: 0 0 35px 10px rgba(192,57,43,0.3),
-                  0 0 70px 20px rgba(192,57,43,0.12);
-      transition: box-shadow 0.4s ease;
-      z-index: 0;
-      pointer-events: none;
+      /* The glow is just a box-shadow on the outer — no black bg */
+      box-shadow: 0 0 25px 8px rgba(192,57,43,0.25),
+                  0 0 55px 16px rgba(192,57,43,0.1);
+      transition: box-shadow 0.4s ease, transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
     }
-    .photo-outer:hover .photo-glow {
-      box-shadow: 0 0 50px 16px rgba(231,76,60,0.45),
-                  0 0 100px 32px rgba(192,57,43,0.2);
+    /* On hover: pop out toward viewer */
+    .photo-outer:hover {
+      box-shadow: 0 0 35px 10px rgba(231,76,60,0.35),
+                  0 0 70px 22px rgba(192,57,43,0.15);
+      transform: scale(1.08) translateY(-6px);
     }
 
-    /* Inner container clips the image to circle — no black border */
+    /* Clips image to circle — must match outer exactly */
     .photo-container {
-      position: absolute;
-      inset: 0;
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
       overflow: hidden;
+      position: relative;
       z-index: 1;
     }
 
@@ -125,18 +120,19 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%;
+      /* Zoom in on face — increase scale and adjust position */
+      object-position: center 15%;
+      transform: scale(1.4);
+      transform-origin: center 30%;
       display: block;
-      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94),
-                  filter 0.5s ease;
+      transition: filter 0.5s ease;
       filter: brightness(0.92);
     }
     .photo-outer:hover .photo-img {
-      transform: scale(1.13);
-      filter: brightness(0.42);
+      filter: brightness(0.4);
     }
 
-    /* Info overlay sits above image */
+    /* Info overlay */
     .photo-info {
       position: absolute;
       inset: 0;
@@ -171,7 +167,7 @@
     @media (max-width: 768px) {
       .hero { padding: 5rem 1.5rem 2rem; }
       .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .photo-outer { width: 220px; height: 220px; }
+      .photo-outer, .photo-container { width: 220px; height: 220px; }
       .hero-photo-wrap { order: -1; }
       nav { padding: 1rem 1.5rem; }
     }
@@ -226,7 +222,6 @@
 
       <div class="hero-photo-wrap" data-reveal style="transition-delay:0.2s">
         <div class="photo-outer">
-          <div class="photo-glow"></div>
           <div class="photo-container">
             <img src="assets/profile.jpg" alt="Adi Sharma" class="photo-img"/>
           </div>
